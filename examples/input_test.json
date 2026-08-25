@@ -1,0 +1,10 @@
+{
+  "user_id": "usr_99823",
+  "user_role": "Finance_Manager",
+  "tool_name": "update_credit_limit",
+  "parameters": {
+    "account_id": "ACC-88219",
+    "new_limit": 75000
+  },
+  "hitl_approval_token": null
+}
