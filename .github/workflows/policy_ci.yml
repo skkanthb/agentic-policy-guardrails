@@ -12,11 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install OPA CLI
-        run: |
-          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
-          chmod +x ./opa
-          sudo mv ./opa /usr/local/bin/
+      - name: Setup OPA
+        uses: open-policy-agent/setup-opa@v2
+        with:
+          version: latest
 
       - name: Lint Rego Policies
         run: opa check policies/
