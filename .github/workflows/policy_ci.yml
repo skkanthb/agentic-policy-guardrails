@@ -1,0 +1,34 @@
+name: ACCP Policy & Proxy CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA CLI
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/v1.0.0/opa_linux_amd64_static
+          chmod +x ./opa
+          sudo mv ./opa /usr/local/bin/
+
+      - name: Lint Rego Policies
+        run: opa check policies/
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install fastapi uvicorn requests pytest httpx
+
+      - name: Run Proxy Tests
+        run: pytest tests/
