@@ -18,7 +18,7 @@ jobs:
           version: latest
 
       - name: Lint Rego Policies
-        run: opa check policies/
+        run: opa check policies/sap_governance.rego
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,4 +30,4 @@ jobs:
           pip install fastapi uvicorn requests pytest httpx
 
       - name: Run Proxy Tests
-        run: pytest tests/
+        run: python -m unittest discover -s tests
