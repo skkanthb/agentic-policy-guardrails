@@ -43,7 +43,7 @@ You can test this policy interactively via the official OPA Playground:
 * **OPA Rego Policy:** Located in `policies/agent_governance.rego` (Rego v1.0 syntax).
 * **Sample Input Payload:** Located in `examples/input_test.json`.
 
-###Try Interactive Demo
+## Try Interactive Demo
 https://play.openpolicyagent.org/p/g_ODA0OTg2YzlhZTYzMzE3YTJhZjY4NjkxNzZmMDkwMGZfpWGeFGMJwy7aT6JFf2TaVe1hzPU
 
 ---
