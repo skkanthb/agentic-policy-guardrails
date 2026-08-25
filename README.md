@@ -38,13 +38,9 @@ Execute API/Database                          Return Policy Violation Error
 * **Risk-Tiered Escalation:** Categorizes tool calls by financial/operational risk; automatically requires Human-in-the-Loop (HITL) multi-factor confirmation for tier-1 actions.
 * **Dynamic Schema Validation:** Verifies structural type matching and runtime boundary checks independent of LLM prompt state.
 
-## Interactive Verification & Playground
-You can test this policy interactively via the official OPA Playground:
-* **OPA Rego Policy:** Located in `policies/agent_governance.rego` (Rego v1.0 syntax).
-* **Sample Input Payload:** Located in `examples/input_test.json`.
-
-## Try Interactive Demo
-https://play.openpolicyagent.org/p/g_ODA0OTg2YzlhZTYzMzE3YTJhZjY4NjkxNzZmMDkwMGZfpWGeFGMJwy7aT6JFf2TaVe1hzPU
+* ## Interactive Verification & Playground
+You can test this policy live without installing OPA via the official OPA Playground:
+* **Interactive Demo:** [Open in OPA Playground](https://play.openpolicyagent.org/p/g_ODA0OTg2YzlhZTYzMzE3YTJhZjY4NjkxNzZmMDkwMGZfpWGeFGMJwy7aT6JFf2TaVe1hzPU)
 
 ---
 *Created as part of an independent R&D initiative in AI Safety, Policy-as-Code, and Enterprise Governance.*
