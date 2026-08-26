@@ -37,7 +37,7 @@ class TestACCPProxy(unittest.TestCase):
         response = self.client.post("/api/v1/credit", json=payload)
         
         self.assertEqual(response.status_code, 403)
-        self.assertEqual(response.json()["error_code"], "POLICY_BREACH_HITL_REQUIRED")
+        self.assertEqual(response.json()["error_code"], "POLICY_BREACH_DENIED")
 
 if __name__ == "__main__":
     unittest.main()
