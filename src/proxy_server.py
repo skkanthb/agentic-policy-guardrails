@@ -4,10 +4,6 @@ from fastapi import FastAPI, HTTPException, Request, Response
 
 app = FastAPI(title="ACCP Security Proxy (Open-Source Core)")
 
-# Points at the agent.governance policy (policies/agent_governance.rego),
-# which supports role checks AND a Human-in-the-Loop approval token —
-# unlike the older sap.sox policy, which could only ever say "no" once
-# a request was over the threshold.
 OPA_URL = os.getenv("OPA_URL", "http://localhost:8181/v1/data/agent/governance")
 LIVE_SAP_URL = os.getenv("SAP_GATEWAY_URL", "https://live-sap-gateway.yourcompany.com/api/v1/credit")
 
@@ -15,8 +11,6 @@ LIVE_SAP_URL = os.getenv("SAP_GATEWAY_URL", "https://live-sap-gateway.yourcompan
 async def handle_sap_credit_update(request: Request, response: Response):
     payload = await request.json()
 
-    # This is the shape policies/agent_governance.rego actually expects —
-    # it matches examples/input_test.json exactly.
     opa_input = {
         "input": {
             "user_id": payload.get("user_id"),
@@ -34,15 +28,20 @@ async def handle_sap_credit_update(request: Request, response: Response):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Policy engine unreachable: {str(e)}")
 
-    # 1. ALLOWED PATH
+    print(f"ACCP DECISION | user={payload.get('user_id')} role={payload.get('user_role')} "
+          f"tool={payload.get('tool_name')} new_limit={payload.get('parameters',{}).get('new_limit')} "
+          f"allow={result.get('allow')} require_hitl={result.get('require_hitl')}")
+
     if result.get("allow") is True:
+        print(f"ABOUT TO CALL SAP SANDBOX at {LIVE_SAP_URL} ...")
         try:
             sap_res = requests.post(LIVE_SAP_URL, json=payload, headers=dict(request.headers))
+            print(f"SAP SANDBOX RESPONDED | status={sap_res.status_code} body={sap_res.text[:300]}")
             return sap_res.json()
-        except Exception:
+        except Exception as e:
+            print(f"SAP SANDBOX CALL FAILED: {e}")
             return {"status": "SUCCESS", "message": "Transaction allowed and processed."}
 
-    # 2. BLOCKED / ESCALATED PATH
     response.status_code = 403
     if result.get("require_hitl") is True:
         return {
@@ -55,4 +54,3 @@ async def handle_sap_credit_update(request: Request, response: Response):
         "error_code": "POLICY_BREACH_DENIED",
         "message": "Action denied by security policy (invalid action or unauthorized role).",
     }
-    
