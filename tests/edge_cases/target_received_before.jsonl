@@ -1,0 +1,13 @@
+{"ts": 1793758034.111184, "case_id": "P01", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": 30000}, "hitl_approval_token": null}}
+{"ts": 1793758034.4457831, "case_id": "P04", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": 50000}, "hitl_approval_token": null}}
+{"ts": 1793758034.676685, "case_id": "P06", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1"}, "hitl_approval_token": null}}
+{"ts": 1793758034.777843, "case_id": "P07", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "hitl_approval_token": null}}
+{"ts": 1793758034.875724, "case_id": "P08", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "newLimit": 75000}, "hitl_approval_token": null}}
+{"ts": 1793758034.9849799, "case_id": "P09", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "amount": 75000}, "hitl_approval_token": null}}
+{"ts": 1793758035.106248, "case_id": "P10", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "new_limit": 75000, "hitl_approval_token": null}}
+{"ts": 1793758035.802494, "case_id": "P14", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": -5000}, "hitl_approval_token": null}}
+{"ts": 1793758035.919925, "case_id": "P15", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": 0}, "hitl_approval_token": null}}
+{"ts": 1793758036.127431, "case_id": "P17", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": null}, "hitl_approval_token": null}}
+{"ts": 1793758036.231617, "case_id": "P18", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": true}, "hitl_approval_token": null}}
+{"ts": 1793758036.991678, "case_id": "P26", "body": {"user_role": "Finance_Manager", "tool_name": "get_customer_balance", "parameters": {"account_id": "ACC-1", "new_limit": 75000}, "hitl_approval_token": null}}
+{"ts": 1793758037.5486941, "case_id": "P32", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": 30000, "requested_limit": 75000}, "hitl_approval_token": null}}

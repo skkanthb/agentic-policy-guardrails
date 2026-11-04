@@ -1,0 +1,1 @@
+{"id": "P33", "label": "sci_notation_literal", "expected": "HITL", "payload": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": 7.5e4}, "hitl_approval_token": null}}

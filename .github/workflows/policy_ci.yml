@@ -15,12 +15,17 @@ jobs:
       - name: Setup OPA
         uses: open-policy-agent/setup-opa@v2
         with:
-          version: latest
+          version: 1.20.1
 
       - name: Lint Rego Policies
         run: |
           opa check policies/agent_governance.rego
           opa check policies/sap_governance.rego
+
+      - name: Policy edge cases
+        run: |
+          cat tests/edge_cases/cases.jsonl tests/edge_cases/cases_extra.jsonl > /tmp/all_cases.jsonl
+          tests/edge_cases/run_policy_cases.sh opa policies/agent_governance.rego /tmp/all_cases.jsonl /tmp/policy_ci.csv
 
       - name: Set up Python
         uses: actions/setup-python@v5
