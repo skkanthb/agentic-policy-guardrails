@@ -13,4 +13,6 @@ while IFS= read -r line; do
   case "$exp" in ALLOW_IF_TOKEN_VALID) m=REVIEW;; *) [ "$dec" = "$exp" ] && m=OK || m=MISMATCH;; esac
   echo "$id,$label,$exp,$allow,$hitl,$dec,$m" >> "$OUT"
 done < "$CASES"
-echo "Wrote $OUT"; grep -c MISMATCH "$OUT" | xargs echo "Mismatches:"
+mm=$(grep -c MISMATCH "$OUT" || true)
+echo "Wrote $OUT"; echo "Mismatches: $mm"
+[ "$mm" -eq 0 ]
