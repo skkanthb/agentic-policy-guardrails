@@ -8,14 +8,14 @@ default require_hitl = false
 # Allow execution ONLY IF all safety checks pass
 allow if {
     valid_action
-    not exceeeds_financial_threshold
+    not exceeds_financial_threshold
     user_authorized
 }
 
 # Require Human-in-the-Loop (HITL) if threshold is exceeded but below hard lock
 require_hitl if {
     valid_action
-    exceeeds_financial_threshold
+    exceeds_financial_threshold
     input.hitl_approval_token == null
 }
 
@@ -25,7 +25,7 @@ valid_action if {
 }
 
 # 2. Financial Boundary Enforcement ($50,000 threshold limit)
-exceeeds_financial_threshold if {
+exceeds_financial_threshold if {
     input.tool_name == "update_credit_limit"
     input.parameters.new_limit > 50000
 }
