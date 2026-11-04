@@ -1,0 +1,2 @@
+{"ts": 1793762357.421312, "case_id": "P01", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": 30000}}}
+{"ts": 1793762357.747349, "case_id": "P04", "body": {"user_role": "Finance_Manager", "tool_name": "update_credit_limit", "parameters": {"account_id": "ACC-1", "new_limit": 50000}}}

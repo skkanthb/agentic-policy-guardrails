@@ -9,3 +9,5 @@
 - jq: jq-1.7.1-apple
 - OS: macOS 26.7.1 (x86_64)
 - ERP target: tests/edge_cases/mock_target.py (local mock, port 9000)
+- Commit under test (after): d4d9bb2d22c2772e02d1ebe13df36c724d08413c
+- Date (after run): 2026-11-03

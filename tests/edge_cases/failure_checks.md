@@ -18,3 +18,19 @@ Response:
 {"detail":"Policy engine unreachable: HTTPConnectionPool(host='localhost', port=8181): Max retries exceeded with url: /v1/data/agent/governance (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8181): Failed to establish a new connection: [Errno 61] Connection refused\"))"}
 HTTP 500
 ```
+
+# Failure checks — after fix (2026-11-03, commit d4d9bb2)
+
+## Check 1 — mock ERP stopped, policy engine running
+Response:
+```
+{"status":"ERROR","error_code":"ERP_CALL_FAILED","message":"Policy allowed the request, but the ERP call failed (ConnectionError). The write was not confirmed."}
+HTTP 502
+```
+
+## Check 2 — policy engine stopped, mock ERP running
+Response:
+```
+{"detail":"Policy engine unreachable: HTTPConnectionPool(host='localhost', port=8181): Max retries exceeded with url: /v1/data/agent/governance (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8181): Failed to establish a new connection: [Errno 61] Connection refused\"))"}
+HTTP 500
+```
