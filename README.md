@@ -70,6 +70,37 @@ tests/edge_cases/run_policy_cases.sh opa policies/agent_governance.rego tests/ed
 You can test the policy logic without installing OPA via the official OPA Playground. The Playground link below is a snapshot shared before the edge-case fixes and shows the policy as it was then:
 * **Interactive Demo:** [Open in OPA Playground](https://play.openpolicyagent.org/p/g_ODA0OTg2YzlhZTYzMzE3YTJhZjY4NjkxNzZmMDkwMGZfpWGeFGMJwy7aT6JFf2TaVe1hzPU)
 
+## Applied example: AI agent → policy check → live SAP S/4HANA sandbox
+
+I ran this pattern end to end with a hosted AI agent and a real SAP system.
+
+- **Agent:** Azure AI Foundry Agent Service (gpt-4.1-mini). The proxy was registered
+  as an OpenAPI tool. Requests were typed in plain English; the agent built the
+  tool calls itself.
+- **Target:** a paid, shared SAP S/4HANA 2023 training system (no production or
+  customer data), via the OData Business Partner API, with the proxy handling
+  SAP's CSRF token.
+- **Action governed:** setting or clearing the Central Block on a Business Partner
+  record. (The credit-limit service the policy was first written for was not
+  available on this system, so the test used Business Partner blocking instead.)
+
+| Request | Policy decision | SAP outcome |
+|---|---|---|
+| Block BP, authorized role | Allowed | Write succeeded (HTTP 204), confirmed in SAP GUI |
+| Unblock BP, no approval | Denied, approval required | No call made to SAP; record unchanged |
+
+**Findings from the run**
+- Azure AI Foundry's OpenAPI tool does not pass non-2xx response bodies to the
+  model, so the proxy returns HTTP 200 with `"status": "BLOCKED"` in the body.
+- The agent sometimes declined to attempt the unblock at all because of wording in
+  the tool description. Agent behavior varied; the policy check gave the same
+  result every time it was called.
+
+**Not shown by this test:** verified identity (the role is stated by the caller),
+an approval-and-resume flow, segregation of duties across users, any SAP object
+other than the Business Partner block, or a production deployment.
+
+[Redacted screenshots: agent chat, tool-call trace, SAP GUI before/after]
 ---
 *Created as part of an independent R&D initiative in AI Safety, Policy-as-Code, and Enterprise Governance.*
 
